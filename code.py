@@ -1,3 +1,4 @@
+# Write your code here :-)
 import time
 import board
 import neopixel
@@ -37,14 +38,44 @@ def fade(c1, c2):
         pixels.show()
         time.sleep(0.01)  # debounce delay
 #end helper function
+now = 0
 
 while True:
-    fade(OFF,RED)
-    fade(RED,PURPLE)
-    fade(PURPLE,BLUE)
-    fade(BLUE,CYAN)
-    fade(CYAN,GREEN)
-    fade(GREEN,WHITE)
-    fade(WHITE,OFF)
-    time.sleep(0.5)  # debounce delay# Write your code here :-)
-# Write your code here :-)
+    if touch.value:
+        now=now+1
+        if (now == 0):
+            pixels.fill(OFF)
+            pixels.show()
+        if (now == 1):
+            fade(OFF,RED)
+            fade(RED,PURPLE)
+            fade(PURPLE,BLUE)
+            fade(BLUE,CYAN)
+            fade(CYAN,GREEN)
+            fade(GREEN,WHITE)
+            fade(WHITE,OFF)
+            time.sleep(0.5)
+        if touch.value:
+            now = now+1
+            break
+        if (now == 2):
+            COLOR = PURPLE
+            for i in range(0,12,1):
+                pixels[i] = COLOR
+                pixels.show()
+                time.sleep(0.1)
+            if touch.value:
+                now = now+1
+                break
+        if (now == 3):
+            COLOR = RED
+            for i in range(0,12,1):
+                pixels[i] = COLOR
+                pixels.show()
+                time.sleep(0.1)
+            if touch.value:
+                now = now+1
+                break
+    if(now>3):
+        now = 0
+    time.sleep(0.2)
